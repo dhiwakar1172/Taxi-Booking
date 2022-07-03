@@ -3,6 +3,7 @@ package com.booking.taxt;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -74,7 +75,7 @@ public class Booker {
         int nextfreeTime = 0;
         int nextPoint = 0;
         Taxi bookedTaxi = null;
-        String tripDetail = "";
+        List<String> tripDetail = new LinkedList<String>();
         
         for (Taxi taxi : availableTaxies) {	
         	int distanceBetweenCustomerAndTaxi = Math.abs(pickupPoint-taxi.currentPosition)*15;
@@ -86,7 +87,13 @@ public class Booker {
                 int dropTime = pickupTime+distanceBetweenpickUpandDrop/15;
                 nextfreeTime=dropTime;
                 nextPoint=dropPoint;
-                tripDetail=taxi.taxiId+" "+customerId+" "+pickUpPointToLoc(pickupPoint)+" "+pickUpPointToLoc(dropPoint)+" "+pickupTime+" "+dropTime+" "+earning;
+                tripDetail.add(String.valueOf(taxi.taxiId));
+                tripDetail.add(String.valueOf(customerId));
+                tripDetail.add(String.valueOf(pickUpPointToLoc(pickupPoint)));
+                tripDetail.add(String.valueOf(pickUpPointToLoc(dropPoint)));
+                tripDetail.add(String.valueOf(pickupTime));
+                tripDetail.add(String.valueOf(dropTime));
+                tripDetail.add(String.valueOf(earning));
                 minDistance=distanceBetweenCustomerAndTaxi;
                 
                 
